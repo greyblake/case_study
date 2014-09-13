@@ -16,8 +16,13 @@ group :development do
   gem 'yard'
 end
 
+group :development, :test do
+  gem 'pry'
+end
+
 group :test do
   gem 'rspec-rails', '~> 3.1.0'
+  gem 'shoulda-matchers'
 end
 
 # Use unicorn as the app server

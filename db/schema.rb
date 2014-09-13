@@ -11,6 +11,53 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20140913122008) do
+
+  create_table "categories", force: true do |t|
+    t.integer  "user_id",    null: false
+    t.string   "name",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "categories", ["user_id"], name: "index_categories_on_user_id"
+
+  create_table "collections", force: true do |t|
+    t.integer  "user_id",    null: false
+    t.string   "name",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "collections", ["user_id"], name: "index_collections_on_user_id"
+
+  create_table "monuments", force: true do |t|
+    t.integer  "category_id",   null: false
+    t.integer  "collection_id", null: false
+    t.string   "name",          null: false
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "monuments", ["category_id"], name: "index_monuments_on_category_id"
+  add_index "monuments", ["collection_id"], name: "index_monuments_on_collection_id"
+
+  create_table "pictures", force: true do |t|
+    t.integer  "monument_id", null: false
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "pictures", ["monument_id"], name: "index_pictures_on_monument_id"
+
+  create_table "users", force: true do |t|
+    t.string   "login",           null: false
+    t.string   "password_digest", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end
