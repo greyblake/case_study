@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
       flash[:notice] = "You have successfully logged in"
       redirect_to collections_path
     else
-      flash[:alert] = "Incorrect login or password"
+      flash.now[:alert] = "Incorrect login or password"
       render "new"
     end
   end
