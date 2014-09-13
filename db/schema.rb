@@ -60,4 +60,6 @@ ActiveRecord::Schema.define(version: 20140913122008) do
     t.datetime "updated_at"
   end
 
+  add_index "users", ["login"], name: "index_users_on_login", unique: true
+
 end
