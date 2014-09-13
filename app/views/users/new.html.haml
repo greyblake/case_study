@@ -1,0 +1,48 @@
+.row
+  .small-8
+    .row
+      .small-3.columns
+      .small-9.columns
+        %h1 Sign up
+
+= form_for @user, url: {action: :create} do |f|
+  - if @user.errors.any?
+    .row
+      .small-8
+        .row
+          .small-3.columns
+          .small-9.columns
+            .alert-box.alert
+              %ul
+              - @user.errors.full_messages.each do |error|
+                %li= error
+  .row
+    .small-8
+      .row
+        .small-3.columns
+          %label.right.inline
+            Login
+        .small-9.columns
+          = f.text_field :login
+  .row
+    .small-8
+      .row
+        .small-3.columns
+          %label.right.inline
+            Password
+        .small-9.columns
+          = f.password_field :password
+  .row
+    .small-8
+      .row
+        .small-3.columns
+          %label.right.inline
+            Password Confirmation
+        .small-9.columns
+          = f.password_field :password_confirmation
+  .row
+    .small-8
+      .row
+        .small-3.columns
+        .small-9.columns
+          = f.submit "Sign up", class: "button radius expand"
