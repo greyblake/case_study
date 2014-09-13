@@ -1,27 +1,22 @@
-.row
-  %h1 Sign in
+- content_for :title, "Sign in"
 
 = form_tag sessions_path do
   .row
-    .small-8
+    .large-8.columns
       .row
         .small-3.columns
           %label.right.inline
             Login
         .small-9.columns
           = text_field_tag :login, params[:login]
-  .row
-    .small-8
       .row
         .small-3.columns
           %label.right.inline
             Password
         .small-9.columns
           = password_field_tag :password, params[:password]
-  .row
-    .small-8
       .row
         .small-3.columns
         .small-9.columns
-          = submit_tag  "Sing in", class: "button radius expand"
+          = submit_tag  "Sign in", class: "button radius expand"
 

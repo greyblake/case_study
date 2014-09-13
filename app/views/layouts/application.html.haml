@@ -15,10 +15,15 @@
     - else
       = render partial: "shared/top_bar"
 
-    - if flash[:notice]
-      .alert-box.secondary= flash[:notice]
-    - if flash[:alert]
-      .alert-box.warning= flash[:alert]
+    .layout
+      - if content_for?(:title)
+        %h1= yield(:title)
 
-    = yield
+      - if flash[:notice]
+        .alert-box.secondary= flash[:notice]
+      - if flash[:alert]
+        .alert-box.warning= flash[:alert]
+
+      = yield
+
     = javascript_include_tag "application"
