@@ -1,0 +1,10 @@
+- content_for :title, "Collection #{@collection.name}"
+
+
+.row
+  .large-12
+    %ul
+      - @collection.monuments.each do |monument|
+        %li= link_to monument.name
+
+=link_to "New monument", new_collection_monument_path(@collection)

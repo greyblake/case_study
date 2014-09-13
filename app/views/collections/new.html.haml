@@ -1,0 +1,17 @@
+- content_for :title, "New Collection"
+
+- if @collection.errors.any?
+  .alert-box.warning
+    %ul
+    - @collection.errors.full_messages.each do |error|
+      %li= error
+
+= form_for @collection, url: {action: :create} do |f|
+  .row
+    .large-3.columns
+      %label.right.inline Collection name
+    .large-9.columns
+      = f.text_field :name
+  .row
+    .large-offset-3.large-9.columns
+      = f.submit "Create collection", class: "button radius expand"

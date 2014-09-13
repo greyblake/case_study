@@ -13,6 +13,12 @@ Rails.application.routes.draw do
   get 'sign_up' => 'users#new', as: :sign_up
 
 
+  resources :collections do
+    resources :monuments
+  end
+
+  resource :categories
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
