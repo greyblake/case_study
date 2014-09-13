@@ -1,0 +1,24 @@
+!!!
+%html{:lang => "en"}
+  %head
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    %title= content_for?(:title) ? yield(:title) : "Monuments"
+
+    = stylesheet_link_tag    "application"
+    = javascript_include_tag "vendor/modernizr"
+    = csrf_meta_tags
+
+  %body
+    -if current_user
+      = render partial: "shared/user_top_bar"
+    - else
+      = render partial: "shared/top_bar"
+
+    - if flash[:notice]
+      .alert-box.secondary= flash[:notice]
+    - if flash[:alert]
+      .alert-box.warning= flash[:alert]
+
+    = yield
+    = javascript_include_tag "application"
