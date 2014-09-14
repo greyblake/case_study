@@ -1,0 +1,32 @@
+- content_for :title, "Search monuments"
+
+= form_tag search_results_path do
+  .row
+    .large-3.columns
+      %label.right.inline Name
+    .large-9.columns
+      = text_field_tag :name, params[:name]
+  .row
+    .large-3.columns
+      %label.right.inline Category
+    .large-9.columns
+      = select_tag :category_id,  options_from_collection_for_select(@categories, :id, :name, params[:category_id]), include_blank: true
+  .row
+    .small-offset-3.small-9.columns
+      = submit_tag  "Search", class: "button radius expand"
+
+
+%table
+  %thead
+    %tr
+      %th Monument
+      %th Collection
+      %th Category
+  %tbody
+    -# TODO: it will fetch collection and category for every monument, what actually
+    -# isn't the best idea and will result in't many SQL queries
+    - @monuments.each do |monument|
+      %tr
+        %td= link_to monument.name, collection_monument_path(monument.collection, monument)
+        %td= link_to monument.collection.name, collection_path(monument.collection)
+        %td= link_to monument.category.name, category_path(monument.category)

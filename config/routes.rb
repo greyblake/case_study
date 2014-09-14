@@ -12,7 +12,6 @@ Rails.application.routes.draw do
   resources :users, only: :create
   get 'sign_up' => 'users#new', as: :sign_up
 
-
   resources :collections do
     resources :monuments
   end
@@ -22,6 +21,9 @@ Rails.application.routes.draw do
   end
 
   resources :categories, except: :show
+
+  resources :search_results, only: %i(index create)
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
