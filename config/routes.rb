@@ -17,7 +17,11 @@ Rails.application.routes.draw do
     resources :monuments
   end
 
-  resource :categories
+  resources :monuments do
+    resources :pictures
+  end
+
+  resources :categories, except: :show
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

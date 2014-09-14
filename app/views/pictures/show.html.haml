@@ -1,0 +1,29 @@
+- content_for :title, "Picture #{@picture.name}"
+
+.row
+  .large-2.columns
+    .right.inline
+      %b Monument
+  .large-10.columns
+    %p= link_to @monument.name, collection_monument_path(@monument.collection, @monument)
+
+.row
+  .large-2.columns
+    .right.inline
+      %b Description:
+  .large-10.columns
+    %p= @picture.description
+
+.row
+  .large-2.columns
+    .right.inline
+      %b Actions:
+  .large-10.columns
+    = link_to "Edit", edit_monument_picture_path(@monument, @picture)
+    |
+    = link_to "Remove", monument_picture_path(@monument, @picture), method: :delete, data: { confirm: "Are you sure?" }
+
+
+.row
+  .large-offeset-2.large-10.columns
+    = image_tag @picture.picture.url(:large)

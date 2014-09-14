@@ -3,6 +3,24 @@
 .row
   .large-2.columns
     .right.inline
+      %b Collection:
+  .large-10.columns
+    = link_to @collection.name, collection_path(@collection)
+.row
+  .large-2.columns
+    .right.inline
       %b Description:
   .large-10.columns
     %p= @monument.description
+
+
+- @monument.pictures.each_slice(3) do |pictures_row|
+  .row
+    - pictures_row.each do |picture|
+      .large-4.columns
+        = link_to monument_picture_path(@monument, picture) do
+          = image_tag picture.picture.url(:thumb)
+
+.row
+  .large-3.columns
+    =link_to "Add picture", new_monument_picture_path(@monument)

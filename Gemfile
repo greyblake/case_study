@@ -14,6 +14,7 @@ gem 'bcrypt'      , '~> 3.1.7'
 gem 'haml'
 gem 'sass'
 gem 'foundation-rails'
+gem "paperclip", "~> 4.2"
 
 
 group :development do

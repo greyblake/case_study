@@ -44,11 +44,15 @@ ActiveRecord::Schema.define(version: 20140913122008) do
   add_index "monuments", ["collection_id"], name: "index_monuments_on_collection_id"
 
   create_table "pictures", force: true do |t|
-    t.integer  "monument_id", null: false
+    t.integer  "monument_id",          null: false
     t.string   "name"
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "picture_file_name"
+    t.string   "picture_content_type"
+    t.integer  "picture_file_size"
+    t.datetime "picture_updated_at"
   end
 
   add_index "pictures", ["monument_id"], name: "index_pictures_on_monument_id"

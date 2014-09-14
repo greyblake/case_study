@@ -10,6 +10,8 @@ class CreatePictures < ActiveRecord::Migration
 
     add_index :pictures, :monument_id
 
+    add_attachment :pictures, :picture
+
     if respond_to?(:add_foreign_key)
       add_foreign_key :pictures, :monuments
     end

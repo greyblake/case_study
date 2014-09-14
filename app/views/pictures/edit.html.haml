@@ -1,0 +1,24 @@
+- content_for :title, "Update picture"
+
+= form_for @picture, url: { action: :update }, :html => { :multipart => true } do |f|
+  = render partial: "shared/errors", locals: { model: @picture }
+  .row
+    .large-3.columns
+      %label.right.inline Name
+    .large-9.columns
+      = f.text_field :name
+  .row
+    .large-3.columns
+      %label.right.inline Picture
+    .large-3.columns
+      = f.file_field :picture
+    .large-6.columns
+      = image_tag @picture.picture.url(:thumb)
+  .row
+    .large-3.columns
+      %label.right.inline Description
+    .large-9.columns
+      = f.text_area :description
+  .row
+    .large-offset-3.large-9.columns
+      = f.submit "Update picture", class: "button radius expand"
