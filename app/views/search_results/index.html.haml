@@ -23,8 +23,6 @@
       %th Collection
       %th Category
   %tbody
-    -# TODO: it will fetch collection and category for every monument, what actually
-    -# isn't the best idea and will result in't many SQL queries
     - @monuments.each do |monument|
       %tr
         %td= link_to monument.name, collection_monument_path(monument.collection, monument)

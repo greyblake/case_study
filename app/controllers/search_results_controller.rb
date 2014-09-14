@@ -7,7 +7,7 @@ class SearchResultsController < AuthorizedController
   end
 
   def create
-    @monuments = current_user.monuments
+    @monuments = current_user.monuments.includes(:category).includes(:collection)
 
     if params[:name].present?
       @monuments = @monuments.where("monuments.name LIKE ?", "%#{params[:name]}%")
