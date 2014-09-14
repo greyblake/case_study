@@ -1,4 +1,4 @@
 - content_for :title, "New Collection"
 
 = form_for @collection, url: {action: :create} do |f|
-  = render partial: "form", locals: { f: f }
+  = render partial: "form", locals: { f: f, button_text: "Create Collection" }
