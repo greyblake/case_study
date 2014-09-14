@@ -59,14 +59,27 @@ describe CategoriesController do
   end
 
   describe "#update" do
-    it "updates category" do
-      post :update, id: category.id, category: { name: "Esperanto" }
+    context "valid params" do
+      it "updates category" do
+        post :update, id: category.id, category: { name: "Esperanto" }
 
-      expect(response).to redirect_to categories_path
+        expect(response).to redirect_to categories_path
 
-      category.reload
-      expect(category.name).to eq "Esperanto"
+        category.reload
+        expect(category.name).to eq "Esperanto"
+      end
     end
+
+    context "invalid params" do
+      it "renders edit template" do
+        post :update, id: category.id, category: { name: "" }
+
+        expect(response).to be_ok
+        expect(response).to render_template("edit")
+      end
+    end
+
+
   end
 
   describe "destroy" do

@@ -36,6 +36,16 @@ describe MonumentsController do
       expect(assigns[:monument]).to be_a Monument
       expect(assigns[:categories]).to eq categories
     end
+
+    context "no categories exist" do
+      it "sets alert message" do
+        user.categories.destroy_all
+
+        get :new, collection_id: collection.id
+
+        expect(flash.alert).to eq "Please create at least one category before adding monuments"
+      end
+    end
   end
 
   describe "#create" do
