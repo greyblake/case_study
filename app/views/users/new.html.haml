@@ -1,33 +1,27 @@
 - content_for :title, "Sign up"
 
-- if @user.errors.any?
-  .alert-box.warning
-    %ul
-    - @user.errors.full_messages.each do |error|
-      %li= error
-
 = form_for @user, url: {action: :create} do |f|
+  = render partial: "shared/errors", locals: { model: @user }
   .row
-    .small-8
+    .large-8
       .row
-        .small-3.columns
+        .large-3.columns
           %label.right.inline
             Login
-        .small-9.columns
+        .large-9.columns
           = f.text_field :login
       .row
-        .small-3.columns
+        .large-3.columns
           %label.right.inline
             Password
-        .small-9.columns
+        .large-9.columns
           = f.password_field :password
       .row
-        .small-3.columns
+        .large-3.columns
           %label.right.inline
             Confirmation
         .small-9.columns
           = f.password_field :password_confirmation
       .row
-        .small-3.columns
-        .small-9.columns
+        .large-offset-3.large-9.columns
           = f.submit "Sign up", class: "button radius expand"
