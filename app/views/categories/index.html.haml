@@ -13,7 +13,8 @@
             %td= category.name
             %td
               =link_to "Edit", edit_category_path(category)
-              =link_to "Remove", category_path(category), method: :delete, data: { confirm: "Are you sure?" }
+              =link_to "Remove", category_path(category), method: :delete, |
+                data: { confirm: "It will remove all monuments that belong to this category. Are you sure?" }
 
 .row
   .large-3

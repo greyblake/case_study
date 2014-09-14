@@ -13,11 +13,11 @@ Rails.application.routes.draw do
   get 'sign_up' => 'users#new', as: :sign_up
 
   resources :collections do
-    resources :monuments
+    resources :monuments, except: :index
   end
 
   resources :monuments do
-    resources :pictures
+    resources :pictures, except: :index
   end
 
   resources :categories, except: :show
