@@ -1,10 +1,22 @@
 - content_for :title, "Collection #{@collection.name}"
 
-
 .row
   .large-12
-    %ul
-      - @collection.monuments.each do |monument|
-        %li= link_to monument.name
+    %table
+      %thead
+        %tr
+          %th Name
+          %th Description
+          %th Actions
+      %tbody
+        - @collection.monuments.each do |monument|
+          %tr
+            %td= link_to monument.name, collection_monument_path(@collection, monument)
+            %td= truncate(monument.description, length: 80)
+            %td
+              =link_to "Edit", edit_collection_monument_path(@collection, monument)
+              =link_to "Remove", collection_monument_path(@collection, monument), method: :delete, data: { confirm: "Are you sure?" }
 
-=link_to "New monument", new_collection_monument_path(@collection)
+.row
+  .large-3
+    =link_to "New monument", new_collection_monument_path(@collection)

@@ -145,7 +145,9 @@ describe CollectionsController do
   end
 
   context "not authorized user" do
-    before { session[:user_id] = nil }
+    before do
+      session[:user_id] = nil
+    end
 
     it "redirects" do
       get :index
