@@ -1,7 +1,18 @@
 - content_for :title, "Collections"
 
-%ul
-  - @collections.each do |collection|
-    %li= link_to collection.name, collection_path(collection)
+.row
+  .large-12
+    %table
+      %thead
+        %tr
+          %th Name
+          %th Actions
+      %tbody
+        - @collections.each do |collection|
+          %tr
+            %td= link_to collection.name, collection_path(collection)
+            %td
+              =link_to "Edit", edit_collection_path(collection)
+              =link_to "Remove", collection_path(collection), method: :delete, data: { confirm: "Are you sure?" }
 
 =link_to "New collection", new_collection_path

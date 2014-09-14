@@ -2,6 +2,8 @@ require "rails_helper"
 
 describe CollectionsController do
   let(:user) { FactoryGirl.create(:user) }
+  let(:collection) { FactoryGirl.create(:collection, user: user) }
+
 
   before do
     session[:user_id] = user.id
@@ -56,8 +58,6 @@ describe CollectionsController do
 
   describe "#show" do
     it "renders show template" do
-      collection = FactoryGirl.create(:collection, user: user)
-
       get :show, id: collection.id
 
       expect(response).to be_ok
@@ -68,10 +68,77 @@ describe CollectionsController do
     context "collection that belongs to another user" do
       it "redirects to collections" do
         another_user = FactoryGirl.create(:user)
-        collection = FactoryGirl.create(:collection, user: another_user)
+        another_collection = FactoryGirl.create(:collection, user: another_user)
 
-        get :show, id: collection.id
+        get :show, id: another_collection.id
 
+        expect(response).to redirect_to collections_path
+      end
+    end
+  end
+
+  describe "#destroy" do
+    context "collection is found" do
+      it "deletes collection and redirects to index" do
+        delete :destroy, id: collection.id
+
+        expect(Collection.find_by_id(collection.id)).to be_nil
+        expect(response).to redirect_to collections_path
+      end
+    end
+
+    context "collection is not found" do
+      it "redirects to index" do
+        delete :destroy, id: 40506080
+        expect(response).to redirect_to collections_path
+      end
+    end
+  end
+
+
+  describe "#edit" do
+    context "collection is found" do
+      it "assigns @collection" do
+        get :edit, id: collection.id
+
+        expect(response).to be_ok
+        expect(assigns[:collection]).to eq collection
+      end
+    end
+
+    context "collection is not found" do
+      it "redirects to index" do
+        get :edit, id: 40506080
+        expect(response).to redirect_to collections_path
+      end
+    end
+  end
+
+  describe "#update" do
+    context "collection is found" do
+      context "valid params" do
+        it "updates the collection" do
+          post :update, id: collection.id, collection: { name: "Kiev" }
+
+          collection.reload
+          expect(collection.name).to eq "Kiev"
+
+          expect(response).to redirect_to collections_path
+        end
+      end
+
+      context "invalid params" do
+        it "renders edit form" do
+          post :update, id: collection.id, collection: { name: "" }
+
+          expect(response).to render_template("edit")
+        end
+      end
+    end
+
+    context "collection is not found" do
+      it "redirects to index" do
+        post :update, id: 40506080
         expect(response).to redirect_to collections_path
       end
     end

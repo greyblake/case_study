@@ -1,0 +1,4 @@
+- content_for :title, "Edit Collection"
+
+= form_for @collection, url: {action: :update} do |f|
+  = render partial: "form", locals: { f: f }

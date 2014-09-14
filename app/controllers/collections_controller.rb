@@ -1,4 +1,6 @@
 class CollectionsController < AuthorizedController
+  before_filter :fetch_collection, only: %i(show destroy edit update)
+
   def index
     @collections = current_user.collections
   end
@@ -8,8 +10,7 @@ class CollectionsController < AuthorizedController
   end
 
   def create
-    attrs = params.require(:collection).permit(:name)
-    @collection = current_user.collections.create(attrs)
+    @collection = current_user.collections.create(collection_params)
 
     if @collection.save
       flash[:notice] = "Collection \"#{@collection.name}\" is created"
@@ -20,7 +21,32 @@ class CollectionsController < AuthorizedController
   end
 
   def show
+  end
+
+  def destroy
+    @collection.destroy
+    redirect_to collections_path
+  end
+
+  def edit
+  end
+
+  def update
+    if @collection.update(collection_params)
+      flash[:notice] = "Collection #{@collection.name} is updated"
+      redirect_to collections_path
+    else
+      render "edit"
+    end
+  end
+
+
+  private def collection_params
+    params.require(:collection).permit(:name)
+  end
+
+  private def fetch_collection
     @collection = current_user.collections.find_by_id(params[:id])
-    redirect_to collections_path unless @collection
+    return redirect_to collections_path unless @collection
   end
 end
