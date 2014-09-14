@@ -1,0 +1,4 @@
+- content_for :title, "Update Monument"
+
+= form_for @monument, url: { action: :update } do |f|
+  = render partial: "form", locals: { f: f, button_text: "Update Monument" }

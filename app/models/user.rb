@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_many :categories
   has_many :collections
+  has_many :monuments, through: :collections
 
   has_secure_password
 

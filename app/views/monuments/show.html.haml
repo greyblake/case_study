@@ -1,0 +1,8 @@
+- content_for :title, "Monument #{@monument.name}"
+
+.row
+  .large-2.columns
+    .right.inline
+      %b Description:
+  .large-10.columns
+    %p= @monument.description

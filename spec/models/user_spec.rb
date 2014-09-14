@@ -4,6 +4,7 @@ describe User do
   describe 'associations' do
     it { is_expected.to have_many :categories  }
     it { is_expected.to have_many :collections }
+    it { is_expected.to have_many :monuments   }
   end
 
   describe 'validations' do

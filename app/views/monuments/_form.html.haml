@@ -1,0 +1,20 @@
+= render partial: "shared/errors", locals: { model: f.object }
+
+.row
+  .large-3.columns
+    %label.right.inline Name
+  .large-9.columns
+    = f.text_field :name
+.row
+  .large-3.columns
+    %label.right.inline Category
+  .large-9.columns
+    = f.select :category_id, @categories.map {|cat| [cat.name, cat.id] }
+.row
+  .large-3.columns
+    %label.right.inline Description
+  .large-9.columns
+    = f.text_area :description
+.row
+  .large-offset-3.large-9.columns
+    = f.submit button_text, class: "button radius expand"
