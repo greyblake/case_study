@@ -1,6 +1,8 @@
 require "rails_helper"
 
 describe CollectionsController do
+  it_should_behave_like "authorized controller", ->(_) { get :index }
+
   let(:user) { FactoryGirl.create(:user) }
   let(:collection) { FactoryGirl.create(:collection, user: user) }
 
@@ -141,17 +143,6 @@ describe CollectionsController do
         post :update, id: 40506080
         expect(response).to redirect_to collections_path
       end
-    end
-  end
-
-  context "not authorized user" do
-    before do
-      session[:user_id] = nil
-    end
-
-    it "redirects" do
-      get :index
-      expect(response).to redirect_to root_path
     end
   end
 end

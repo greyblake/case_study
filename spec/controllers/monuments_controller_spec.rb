@@ -1,6 +1,8 @@
 require "rails_helper"
 
 describe MonumentsController do
+  it_should_behave_like "authorized controller", ->(_) { get :new, collection_id: 15 }
+
   let!(:user)       { FactoryGirl.create(:user) }
   let!(:collection) { FactoryGirl.create(:collection, user: user) }
   let(:category)    { FactoryGirl.create(:category, user: user) }
@@ -104,18 +106,6 @@ describe MonumentsController do
 
         expect(response).to render_template("edit")
       end
-    end
-  end
-
-
-  context "not authorized user" do
-    before do
-      session[:user_id] = nil
-    end
-
-    it "redirects" do
-      get :new, collection_id: collection.id
-      expect(response).to redirect_to root_path
     end
   end
 end

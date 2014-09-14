@@ -1,6 +1,8 @@
 require "rails_helper"
 
 describe CategoriesController do
+  it_should_behave_like "authorized controller", ->(_) { get :index }
+
   let(:user) { FactoryGirl.create(:user) }
   let(:category) { FactoryGirl.create(:category, user: user) }
 
@@ -76,13 +78,4 @@ describe CategoriesController do
     end
   end
 
-
-  context "not authorized user" do
-    before { session[:user_id] = nil }
-
-    it "redirects" do
-      get :index
-      expect(response).to redirect_to root_path
-    end
-  end
 end
