@@ -6,5 +6,7 @@
   .large-9.columns
     = f.text_field :name
 .row
-  .large-offset-3.large-9.columns
+  .large-3.columns
+    = link_to "Cancel", :back, class: "button radius expand"
+  .large-9.columns
     = f.submit button_text, class: "button radius expand"
