@@ -15,9 +15,7 @@ describe UsersController do
 
       it 'does not create new user' do
         expect(User.count).to eq 0
-      end
-
-      it 'renders new template' do
+        expect(response).to be_ok
         expect(response).to render_template(:new)
       end
     end
@@ -31,12 +29,9 @@ describe UsersController do
 
       it 'creates new user' do
         expect(User.last.login).to eq 'john'
-      end
-
-      it 'redirects to collections' do
         expect(response).to redirect_to collections_path
+        expect(flash.notice).to eq "You have successfully signed up"
       end
-
     end
   end
 end
