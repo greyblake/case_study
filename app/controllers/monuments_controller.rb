@@ -5,6 +5,10 @@ class MonumentsController < AuthorizedController
 
   def new
     @monument = @collection.monuments.new
+
+    if @categories.empty?
+      flash[:alert] = "Please create at least one category before adding monuments"
+    end
   end
 
   def create
