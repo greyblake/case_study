@@ -12,6 +12,7 @@ describe PicturesController do
     monument_id: monument.id,
     picture: {
       name:        "Lenin-1",
+      picture:     fixture_file_upload("liberty.jpeg", "image/jpeg"),
       description: "Yet another Lenin"
     }
   }}
@@ -41,6 +42,7 @@ describe PicturesController do
         post :create, valid_params
 
         new_picture = monument.pictures.last
+        expect(new_picture).to be_present
         expect(new_picture.name).to eq "Lenin-1"
 
         expect(response).to redirect_to monument_picture_path(monument, new_picture)
